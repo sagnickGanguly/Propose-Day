@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Eternal Promise ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300&family=Cinzel+Decorative&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #d4af37; --velvet: #1a0505; --white: #fffafa; }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%; width: 100%;
+            background-color: var(--velvet);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--white);
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* Animated Stardust Background */
+        #bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #3d0a0a 0%, #1a0505 100%);
+            z-index: -1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 40px;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: slowEntry 3s ease-out;
+        }
+
+        @keyframes slowEntry {
+            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .photo-frame {
+            width: 200px; height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            padding: 7px;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .photo-frame img {
+            width: 100%; height: 100%;
+            border-radius: 50%; object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        #story-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            height: 80px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            transition: opacity 1s;
+        }
+
+        .btn-container { position: relative; height: 60px; }
+
+        button {
+            padding: 15px 35px;
+            font-family: 'Cinzel Decorative', serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.4s;
+            font-size: 1rem;
+        }
+
+        #next-btn {
+            background: var(--gold);
+            color: var(--velvet);
+            border: none;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        #yes-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            display: none;
+            box-shadow: 0 0 20px #ff4d6d;
+        }
+
+        #no-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            display: none;
+            position: absolute;
+            left: 55%;
+        }
+
+        .stardust {
+            position: fixed; background: var(--gold); border-radius: 50%;
+            pointer-events: none; opacity: 0.5;
+            animation: drift 15s infinite linear;
+        }
+
+        @keyframes drift {
+            from { transform: translateY(100vh) scale(0.5); }
+            to { transform: translateY(-10vh) scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg"></div>
+
+    <div class="glass-card">
+        <div class="photo-frame">
+            <img id="girl-photo" src="photo1.jpg" alt="My Beautiful Human">
+        </div>
+        
+        <h1 id="title">Hey Bachaaa...</h1>
+        <p id="story-text">I have a few things I've been meaning to say to you.</p>
+
+        <div class="btn-container">
+            <button id="next-btn">START OUR STORY</button>
+            <button id="yes-btn">YES ❤️</button>
+            <button id="no-btn">NO</button>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            "In a world of constant change, you are my only beautiful constant.",
+            "I found my soul’s missing piece the moment you first smiled at me.",
+            "They say home is a place, but for me, home has always been you.",
+            "So, I wanted to ask you something important today..."
+        ];
+
+        let currentStep = 0;
+        const nextBtn = document.getElementById('next-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const textDisp = document.getElementById('story-text');
+        const title = document.getElementById('title');
+
+        // Golden dust particles
+        function createDust() {
+            const dust = document.createElement('div');
+            dust.className = 'stardust';
+            dust.style.left = Math.random() * 100 + 'vw';
+            dust.style.width = dust.style.height = Math.random() * 3 + 1 + 'px';
+            dust.style.animationDuration = Math.random() * 10 + 10 + 's';
+            document.body.appendChild(dust);
+            setTimeout(() => dust.remove(), 15000);
+        }
+        setInterval(createDust, 400);
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < quotes.length) {
+                textDisp.style.opacity = 0;
+                setTimeout(() => {
+                    textDisp.innerText = quotes[currentStep];
+                    textDisp.style.opacity = 1;
+                    currentStep++;
+                }, 800);
+            } else {
+                title.innerText = "Will You Be Mine?";
+                textDisp.innerText = "Forever and always?";
+                nextBtn.style.display = 'none';
+                yesBtn.style.display = 'inline-block';
+                noBtn.style.display = 'inline-block';
+            }
+        });
+
+        // The Runaway No Button Logic
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            title.innerText = "I LOVE YOU! ❤️";
+            textDisp.innerText = "Happy Propose Day, My Life!";
+            noBtn.style.display = 'none';
+            yesBtn.innerText = "FOREVER";
+            // Final Celebration
+            setInterval(() => {
+                const rose = document.createElement('div');
+                rose.innerHTML = '🌹';
+                rose.className = 'stardust';
+                rose.style.left = Math.random() * 100 + 'vw';
+                rose.style.fontSize = '25px';
+                document.body.appendChild(rose);
+            }, 150);
+        });
+    </script>
+</body>
+</html>
